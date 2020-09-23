@@ -1,7 +1,8 @@
+require('dotenv').config();
 const Discord = require('discord.js');
 const { XMLHttpRequest } = require('xmlhttprequest');
 const client = new Discord.Client();
-const token = 'NzU4MTMzNzI2NzQzMTAxNDgw.X2qhDQ.1O7KxjawIShZC7eyGAZbhbw68i8';
+const token = process.env.DISCORDTOKEN;
 const url =
   'https://panel.snowbot.eu/api/moderatorCheckerPC/checkModerator.php?gameServer=';
 const serverName = 'Ilyzaelle';
