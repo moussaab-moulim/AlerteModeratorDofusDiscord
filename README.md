@@ -22,14 +22,13 @@ create a file named `.env`
 add the following line to it
 
 ```
-DISCORDTOKEN={replace with your discord token}
+DISCORDTOKEN=replace_with_your_discord_token
 ```
 
 replace the channelID variable with your discord channel id
 
-run the Command ```bash
+run the Command
+
+```bash
 node .
-
-```
-
 ```
