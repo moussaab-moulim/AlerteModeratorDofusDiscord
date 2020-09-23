@@ -1,0 +1,13 @@
+{
+  "name": "AlerteModeratorDofusDiscord",
+  "version": "1.0.0",
+  "description": "anti moderator notification discord bot for dofus botting",
+  "main": "index.js",
+  "repository": "https://github.com/moussaab-moulim/AlerteModeratorDofusDiscord.git",
+  "author": "moussaab moulim <moussaabmma@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^12.3.1",
+    "xmlhttprequest": "^1.8.0"
+  }
+}
