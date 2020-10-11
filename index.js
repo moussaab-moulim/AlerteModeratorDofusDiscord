@@ -56,27 +56,53 @@ function checkModerator(url, serverName, channel) {
       if (xhr.status === 200) {
         const resLength = xhr.responseText.length;
         const moderateurExist = ' Moderator is online ';
-
-        console.log(
-          'server ' + serverName + ' : ',
-          xhr.responseText.length ? 'mod online' : 'mod offline'
-        );
-        if (resLength > 0) {
-          //console.log('pssed', passedMessages);
-          channel.messages.fetch({ limit: 100 }).then((msg) =>
-            msg.map((x) => {
-              if (x.content.includes(serverName)) x.delete();
-            })
+        if (resLength) {
+          console.log(
+            'server ' + serverName + ' : ',
+            resLength ? 'mod online' : 'mod offline'
           );
-          channel
-            .send(
-              ':ballot_box_with_check:  Checking server ' +
-                serverName +
-                '...' +
-                moderateurExist
-            )
-            //.then((msg) => {msg.delete({ timeout: 6000 });})
-            .catch((e) => console.log(e));
+        }
+
+        if (resLength) {
+          //console.log('pssed', passedMessages);
+
+          channel.messages
+            .fetch({ limit: 100 })
+            .then((msg) => {
+              console.log(msg.content);
+              let serverMessageAlreadyExist = false;
+              return msg.map((x) => {
+                if (x.content.includes(serverName)) {
+                  console.log(serverMessageAlreadyExist);
+                  return (serverMessageAlreadyExist = true);
+                }
+              })
+                ? true
+                : false;
+            })
+            .then((serverMessageAlreadyExist) => {
+              console.log(serverMessageAlreadyExist);
+              if (!serverMessageAlreadyExist) {
+                console.log(
+                  'server ' + serverName + ' : ',
+                  resLength ? 'mod online' : 'mod offline'
+                );
+                channel
+                  .send(
+                    ':ballot_box_with_check:  Checking server ' +
+                      serverName +
+                      '...' +
+                      moderateurExist
+                  )
+                  //.then((msg) => {msg.delete({ timeout: 6000 });})
+                  .catch((e) => console.log(e));
+              } else {
+                console.log(
+                  'server ' + serverName + ' : ',
+                  resLength ? 'mod still online' : 'mod offline'
+                );
+              }
+            });
         } else {
           channel.messages.fetch({ limit: 100 }).then((msg) =>
             msg.map((x) => {
